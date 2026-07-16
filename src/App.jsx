@@ -55,11 +55,14 @@
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 // imports go below here
+import NavBar from "./components/NavBar";
 
 export default function App() {
+    
     return(
         <div className="app">
             {/* NAVBAR */}
+            <NavBar />
             
             {/* HERO */}
             <section className="hero bg-hero">

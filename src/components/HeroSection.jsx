@@ -216,7 +216,7 @@ export default function HeroSection() {
                     transition={ { duartion: 1.2, ease: [0.25, 0.46, 0.45, 0.94] } }
                 />
                 
-                {/** Floating Price Badge */}
+                {/** Floating Price Badge */} 
                 <motion.div
                     className="hero-floating-badge"
                     initial={ { opacity: 0, scale: 0.5 } }

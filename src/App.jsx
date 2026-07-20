@@ -58,6 +58,7 @@
 import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection";
 import RibbonTicker from "./components/RibbonTicker";
+import FeaturesSection from "./components/FeaturesSection";
 
 export default function App() {
     
@@ -77,7 +78,7 @@ export default function App() {
             
             {/* FEATURES / CAROUSEL */}
             <section className="features bg-features" id="shop">
-                
+                <FeaturesSection />
             </section>
             
             {/* PRODUCT SHOWCASE */}

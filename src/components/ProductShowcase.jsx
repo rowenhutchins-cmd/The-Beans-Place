@@ -171,7 +171,7 @@ const products = [
 
 export default function ProductShowcase() {
   return (
-    <div className="product-shocase">
+    <div className="product-showcase">
       <scrollReveal animation="fadeUp">
         <Badge variant="accent" className="mb-4">
           Curated Selection
@@ -179,7 +179,7 @@ export default function ProductShowcase() {
       </scrollReveal>
 
       <ScrollReveal animation="fadeUp" delay={0.1}>
-        <h2 className="product=showcase-title">
+        <h2 className="product=showcase-title size-lg">
           Shop Our
           <br />
           <span className="muted">Finest Beans</span>

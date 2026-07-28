@@ -517,7 +517,7 @@ export default function ContactSection() {
 
                                             <div className="contact-card-content">
                                                 <div
-                                                    className={`contact-card-icon bg-gradient-to-br ${channel.gradient}`}>
+                                                    className={`contact-card-icon bg-linear-to-br ${channel.gradient}`}>
                                                     {channel.icon}
                                                 </div>
 

@@ -29,7 +29,8 @@
 // - ContactSection
 
 /* --- YOUR IMPORTS GO HERE --- */
-
+import { useState } from "react";
+import SubscriptionPage from "./components/SubscriptionPage";
 
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
@@ -66,11 +67,53 @@ import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
 
 export default function App() {
+    const [activePage, setActivePage] = useState("home");
+
+    const handleNavigate = (page, sectionId = "home") => {
+        if (page === "subscriptions") {
+            setActivePage("subscriptions");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+
+        setActivePage("home");
+        window.setTimeout(() => {
+            if (sectionId === "home") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.history.replaceState({}, "", "/");
+                return;
+            }
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            window.history.replaceState({}, "", `#${sectionId}`);
+        }, 50);
+    };
+
+    const handleContact = () => {
+        handleNavigate("home", "contact");
+    };
+
+    if (activePage === "subscriptions") {
+        return (
+            <div className="app">
+                <NavBar onNavigatePage={handleNavigate} />
+                <SubscriptionPage onBack={() => handleNavigate("home")} onContact={handleContact} />
+                <section className="bg-footer">
+                    <FooterSection />
+                </section>
+            </div>
+        );
+    }
     
     return(
         <div className="app">
             {/* NAVBAR */}
-            <NavBar />
+            <NavBar onNavigatePage={handleNavigate} />
             
             {/* HERO */}
             <section className="hero bg-hero">

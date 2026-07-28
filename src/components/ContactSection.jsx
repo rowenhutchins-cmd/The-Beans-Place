@@ -36,7 +36,7 @@
 
 /* --- YOUR IMPORTS GO HERE --- */
 import { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import ScrollReveal from "./ui/ScrollReveal";
 import { StaggerContainer, StaggerItem } from "./ui/ScrollReveal";
 import Separator from "./ui/Separator";
@@ -441,6 +441,8 @@ function ContactFormInline() {
 export default function ContactSection() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const sectionRef = useRef(null);
+    const headerRef = useRef(null);
+    const isHeaderVisible = useInView(headerRef, { once: true, amount: 0.2 });
 
     useEffect(() => {
         const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
@@ -460,12 +462,17 @@ export default function ContactSection() {
 
             <div className="contact-inner">
                 {/* Header */}
-                <ScrollReveal animation="fadeUp" className="contact-header">
+                <motion.div
+                    ref={headerRef}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={isHeaderVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                    transition={{ duration: 0.7, delay: 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="contact-header">
                     <motion.div
                         className="contact-pill"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}>
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        animate={isHeaderVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}>
                         <span>Connect & Collaborate</span>
                     </motion.div>
 
@@ -484,7 +491,7 @@ export default function ContactSection() {
                     </p>
 
                     <Separator className="mt-4 mb-2 mx-auto max-w-48" />
-                </ScrollReveal>
+                </motion.div>
 
                 {/* Two-Column: Form  + Info Cards */}
                 <div className="contact-layout">

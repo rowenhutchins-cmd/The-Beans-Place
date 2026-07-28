@@ -86,7 +86,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/Beans_logo.png";
 import Button from "./ui/Button";
 
-export default function NavBar() {
+export default function NavBar({ onNavigatePage }) {
   const [menuOpen, setMenuOpen] = useState(false);
   // container = menuOpen, function to update the container = setMenuOpen, current value = false
   const [scrolled, setScrolled] = useState(false);
@@ -107,16 +107,33 @@ export default function NavBar() {
       transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}>
       <div className="mx-auto flex w-full max-w-7x1 items-center justify-between px-4 py-3 md:px-8">
         {/* Brand */}
-        <a href="#home" className="brand">
+        <button
+          type="button"
+          onClick={() => onNavigatePage?.("home", "home")}
+          className="brand">
           <img src={logo} alt="Beans Place Logo" className="logo h-12 w-auto md:h-14"></img>
-        </a>
+        </button>
 
         {/* Desktop Nav */}
-        <nav className="nav-links hidden items-center gap-10 md:flex">
-          <a href="#home">Home</a>
-          <a href="#shop">Shop Coffee</a>
-          <a href="#about">Our Story</a>
-          <a href="#contact">Contact</a>
+        <nav className="nav-links hidden items-center gap-6 md:flex">
+          <button type="button" onClick={() => onNavigatePage?.("home", "home")} className="text-sm font-semibold transition-colors hover:text-[var(--amber)]">
+            Home
+          </button>
+          <button type="button" onClick={() => onNavigatePage?.("home", "shop")} className="text-sm font-semibold transition-colors hover:text-[var(--amber)]">
+            Shop Coffee
+          </button>
+          <button type="button" onClick={() => onNavigatePage?.("home", "about")} className="text-sm font-semibold transition-colors hover:text-[var(--amber)]">
+            Our Story
+          </button>
+          <button type="button" onClick={() => onNavigatePage?.("home", "contact")} className="text-sm font-semibold transition-colors hover:text-[var(--amber)]">
+            Contact
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigatePage?.("subscriptions")}
+            className="rounded-full bg-[var(--cream-light)] px-3 py-1.5 text-sm font-semibold text-[var(--coffee)] ring-1 ring-[color:var(--coffee)]/20 transition-all duration-200 hover:bg-[var(--amber)] hover:text-white">
+            Subscriptions
+          </button>
         </nav>
 
         {/* Desktop CTA */}
@@ -152,18 +169,51 @@ export default function NavBar() {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             <nav className="flex flex-col gap-4 px-6 pb-6 pt-2">
-              <a href="#home" onClick={closeMenu} className="text-base font-semibold">
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onNavigatePage?.("home", "home");
+                }}
+                className="text-left text-base font-semibold">
                 Home
-              </a>
-              <a href="#shop" onClick={closeMenu} className="text-base font-semibold">
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onNavigatePage?.("home", "shop");
+                }}
+                className="text-left text-base font-semibold">
                 Shop Coffee
-              </a>
-              <a href="#about" onClick={closeMenu} className="text-base font-semibold">
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onNavigatePage?.("home", "about");
+                }}
+                className="text-left text-base font-semibold">
                 Our Story
-              </a>
-              <a href="#contact" onClick={closeMenu} className="text-base font-semibold">
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onNavigatePage?.("home", "contact");
+                }}
+                className="text-left text-base font-semibold">
                 Contact
-              </a>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenu();
+                  onNavigatePage?.("subscriptions");
+                }}
+                className="w-fit rounded-full bg-[var(--cream-light)] px-3 py-1.5 text-left text-base font-semibold text-[var(--coffee)] ring-1 ring-[color:var(--coffee)]/20">
+                Subscriptions
+              </button>
 
               <Button variant="accent" size="sm" className=",t-2 w-full" onClick={closeMenu}>
                 Order Now

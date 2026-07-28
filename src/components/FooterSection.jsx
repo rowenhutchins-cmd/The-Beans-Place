@@ -244,7 +244,7 @@ export default function FooterSection() {
               Premium coffee beans, roasted to order and shipped fresh. From our roastery to your
               cup since 2012.
             </p>
-            <div className="flex-gap-x-6 justify-self-center md:justify-self-auto">
+            <div className="flex gap-x-6 justify-self-center md:justify-self-auto">
               {navigation.social.map((item) => (
                 <a
                   key={item.name}
@@ -267,6 +267,17 @@ export default function FooterSection() {
               ))}
             </ul>
           </ScrollReveal>
+          
+          <ScrollReveal animation="fadeUp" delay={.2}>
+            <h4 className="footer-col">Company</h4>
+            <ul role="list" className="footer-links mt-4">
+              {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <a href={item.href}>{item.name}</a>
+                </li>
+              ))}
+            </ul>
+        </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.3}>
             <h4 className="footer-col">Support</h4>
@@ -279,6 +290,8 @@ export default function FooterSection() {
             </ul>
           </ScrollReveal>
         </div>
+        
+        
         
         <Separator className="mt-16 mb-6" />
         
